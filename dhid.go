@@ -15,9 +15,11 @@ func (dhid DHID) String() string {
 }
 
 func (dhid DHID) ToSlug() string {
-	return strings.ReplaceAll(string(dhid), ":", "-")
+	return strings.ReplaceAll(dhid.String(), ":", "-")
 }
 
+// IsValid returns true if the DHID has a valid values
+// @todo Add more checks
 func (dhid DHID) IsValid() bool {
 	return len(dhid) > 0
 }
@@ -30,6 +32,5 @@ func (dhid DHID) GetStopPart() DHID {
 	copy(partsArray[:], parts)
 	// Join the three parts in one IFOPT string again
 	ret := strings.Join(partsArray[:], ":")
-	//fmt.Println(partsArray)
 	return DHID(ret)
 }
